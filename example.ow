@@ -1,0 +1,73 @@
+settings
+{
+	modes
+	{
+		Control
+		{
+			Limit Valid Control Points: Third
+			Score To Win: 3
+
+			enabled maps
+			{
+				Oasis 972777519512068292 972777519512068153 972777519512068154
+			}
+		}
+	}
+
+	heroes
+	{
+		General
+		{
+			enabled heroes
+			{
+				Baptiste
+				Bastion
+				Cassidy
+				Junker Queen
+				Moira
+			}
+		}
+	}
+}
+
+subroutines
+{
+	0: init0
+}
+
+rule("Initialise Cassidy")
+{
+	event
+	{
+		Subroutine;
+		init0;
+	}
+
+	actions
+	{
+		Set Ultimate Charge(Event Player, 100);
+		Teleport(Event Player, Vector(-192.270, 17.426, 12.783));
+		Set Facing(Event Player, Vector(1, 0, -1), To World);
+	}
+}
+
+rule("Rule 2")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Button Held(Event Player, Button(Interact)) == True;
+		Is Button Held(Event Player, Button(Melee)) == True;
+	}
+
+	actions
+	{
+		Call Subroutine(init0);
+	}
+}
