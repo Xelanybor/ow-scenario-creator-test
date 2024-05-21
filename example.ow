@@ -4,19 +4,22 @@ settings
 	{
 		Control
 		{
-			Limit Valid Control Points: Third
-			Score To Win: 3
-
 			enabled maps
 			{
 				Oasis 972777519512068292 972777519512068153 972777519512068154
 			}
 		}
+
+		General
+		{
+			Limit Valid Control Points: Third
+			Score To Win: 3
+		}
 	}
 
 	heroes
 	{
-		General
+		Team 1
 		{
 			enabled heroes
 			{
@@ -25,6 +28,18 @@ settings
 				Cassidy
 				Junker Queen
 				Moira
+			}
+		}
+
+		Team 2
+		{
+			enabled heroes
+			{
+				Ana
+				Cassidy
+				Lúcio
+				Orisa
+				Soldier: 76
 			}
 		}
 	}
