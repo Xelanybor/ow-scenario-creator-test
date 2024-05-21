@@ -1,13 +1,18 @@
 class Rule {
 
-    constructor(name, event, conditions, actions) {
+    public name: string;
+    public event: string;
+    public conditions: string;
+    public actions: string;
+
+    public constructor(name: string, event: string, conditions: string, actions: string) {
         this.name = name;
         this.event = event;
         this.conditions = conditions;
         this.actions = actions;
     }
 
-    toString() {
+    public toString() {
         return `rule("${this.name}")
 {
     event
