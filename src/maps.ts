@@ -19,7 +19,7 @@ enum OverwatchMap {
     BlizzardWorld = 'Blizzard World',
     Eichenwalde = 'Eichenwalde',
     Hollywood = 'Hollywood',
-    KingRow = 'King\'s Row',
+    KingsRow = 'King\'s Row',
     Midtown = 'Midtown',
     Numbani = 'Numbani',
     Paraiso = 'Paraíso',
@@ -58,7 +58,7 @@ const hybrid = [
     OverwatchMap.BlizzardWorld,
     OverwatchMap.Eichenwalde,
     OverwatchMap.Hollywood,
-    OverwatchMap.KingRow,
+    OverwatchMap.KingsRow,
     OverwatchMap.Midtown,
     OverwatchMap.Numbani,
     OverwatchMap.Paraiso
