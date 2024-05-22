@@ -33,6 +33,7 @@ enum Hero {
     Symmetra = 'Symmetra',
     Torbjorn = 'Torbjörn',
     Tracer = 'Tracer',
+    Venture = 'Venture',
     Widowmaker = 'Widowmaker',
     Winston = 'Winston',
     WreckingBall = 'Wrecking Ball',
