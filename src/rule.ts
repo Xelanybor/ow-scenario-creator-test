@@ -5,7 +5,7 @@ class Rule {
     public conditions: string;
     public actions: string;
 
-    public constructor(name: string, event: string, conditions: string, actions: string) {
+    public constructor(name: string, event: string, conditions: string = '', actions: string = '') {
         this.name = name;
         this.event = event;
         this.conditions = conditions;
@@ -13,21 +13,30 @@ class Rule {
     }
 
     public toString() {
-        return `rule("${this.name}")
+        let code = `rule("${this.name}")
 {
     event
     {
         ${this.event}
-    }
+    }`
+        if (this.conditions)
+            code += `
+
     conditions
     {
         ${this.conditions}
-    }
+    }`
+        if (this.actions)
+            code += `
+
     actions
     {
         ${this.actions}
-    }
+    }`
+        code += `
 }`;
+
+        return code;
     }
 
 }
