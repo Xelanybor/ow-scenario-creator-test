@@ -1,35 +1,13 @@
-import Rule from "./rule";
-import { Hero, setHeroes } from "./heroes";
-import { OverwatchMap, setMap } from "./maps";
-import Workshop from "./workshop_code";
 
-let workshop = new Workshop();
-workshop.setMap(OverwatchMap.Oasis);
-workshop.setPoint(2);
-workshop.setTeam1([Hero.JunkerQueen, Hero.Cassidy, Hero.Bastion, Hero.Moira, Hero.Baptiste]);
-workshop.setTeam2([Hero.Doomfist, Hero.Tracer, Hero.Sombra, Hero.Ana, Hero.Brigitte]);
+import { Hero } from "./heroes";
+import { OverwatchMap } from "./maps";
+import Scenario from "./scenario";
 
-workshop.addRule(
-    new Rule(
-        "Initialise Cassidy",
-        `Subroutine;
-            init0;`,
-        "",
-        `Set Ultimate Charge(Event Player, 100);
-            Teleport(Event Player, Vector(-192.270, 17.426, 12.783));
-            Set Facing(Event Player, Vector(1, 0, -1), To World);`
-    )
-);
+let scenario = new Scenario();
 
-workshop.addRule(
-    new Rule(
-        "Rule 2",
-        `Ongoing - Each Player;
-    All;
-    All;`,
-        "Is Button Held(Event Player, Button(Interact)) == True;Is Button Held(Event Player, Button(Melee)) == True;",
-        "Call Subroutine(init0);"
-    )
-);
+scenario.setMap(OverwatchMap.Oasis);
+scenario.setPoint(2);
+scenario.setTeam1([Hero.Cassidy], [[-192.270, 17.426, 12.783]], [[1, 0, -1]], [true]);
+scenario.setTeam2([Hero.Venture], [[-192.270, 17.426, 12.783]], [[-1, 0, 1]], [false]);
 
-console.log(workshop.toCode());
+console.log(scenario.generateCode());

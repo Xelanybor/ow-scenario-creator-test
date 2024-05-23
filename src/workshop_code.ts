@@ -7,8 +7,10 @@ class Workshop {
   private team1: Hero[] = [];
   private team2: Hero[] = [];
 
-  private map: OverwatchMap = OverwatchMap.KingRow;
+  private map: OverwatchMap = OverwatchMap.KingsRow;
   private point: number = -1;
+
+  private subroutines: string[] = [];
 
   private rules: Rule[] = [];
 
@@ -30,20 +32,26 @@ class Workshop {
     this.point = point;
   }
 
+  addSubroutine(subroutine: string): void {
+    this.subroutines.push(subroutine);
+  }
+
   addRule(rule: Rule): void {
     this.rules.push(rule);
   }
 
   toCode(): string {
     let code = 'settings\n{\n';
-    code += setHeroes(this.team1, this.team2);
-    code += setMap(this.map, this.point);
+    code += setHeroes(this.team1, this.team2) + '\n';
+    code += setMap(this.map, this.point) + '\n';
     code += '}\n';
     code += 'subroutines\n{\n';
-    code += '0: init0\n';
+    for (let i = 0; i < this.subroutines.length; i++) {
+      code += `${i}: ${this.subroutines[i]}\n`;
+    }
     code += '}\n';
     this.rules.forEach(rule => {
-      code += rule.toString();
+      code += rule.toString() + '\n';
     });
 
     return code;
