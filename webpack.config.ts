@@ -18,5 +18,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
+    libraryTarget: 'umd',
+    library: 'create_scenario',
   },
 };
