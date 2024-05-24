@@ -61,7 +61,8 @@ class Scenario {
                 `Subroutine;
         init${i};`,
                 '',
-                `Set Ultimate Charge(Players On Hero(Hero(${this.team1[i]}), Team 1), ${this.hasUltimate1[i] ? 100 : 0});
+                `Respawn(Players On Hero(Hero(${this.team1[i]}), Team 1));
+                    Set Ultimate Charge(Players On Hero(Hero(${this.team1[i]}), Team 1), ${this.hasUltimate1[i] ? 100 : 0});
                     Teleport(Players On Hero(Hero(${this.team1[i]}), Team 1), Vector(${this.positions1[i][0]}, ${this.positions1[i][1]}, ${this.positions1[i][2]}));
                     Set Facing(Players On Hero(Hero(${this.team1[i]}), Team 1), Vector(${this.facing1[i][0]}, ${this.facing1[i][1]}, ${this.facing1[i][2]}), To World);`
             ))
@@ -74,7 +75,8 @@ class Scenario {
                 `Subroutine;
         init${i + 10};`,
                 '',
-                `Set Ultimate Charge(Players On Hero(Hero(${this.team2[i]}), Team 2), ${this.hasUltimate2[i] ? 100 : 0});
+                `Respawn(Players On Hero(Hero(${this.team2[i]}), Team 2));
+                    Set Ultimate Charge(Players On Hero(Hero(${this.team2[i]}), Team 2), ${this.hasUltimate2[i] ? 100 : 0});
                     Teleport(Players On Hero(Hero(${this.team2[i]}), Team 2), Vector(${this.positions2[i][0]}, ${this.positions2[i][1]}, ${this.positions2[i][2]}));
                     Set Facing(Players On Hero(Hero(${this.team2[i]}), Team 2), Vector(${this.facing2[i][0]}, ${this.facing2[i][1]}, ${this.facing2[i][2]}), To World);`
             ))
