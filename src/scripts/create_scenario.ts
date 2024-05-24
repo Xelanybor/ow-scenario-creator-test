@@ -31,5 +31,6 @@ for (let hero of Object.keys(Hero)) {
 export function printCode() {
     let hero = (Hero as any)[(document.getElementById("heroSelect") as HTMLSelectElement).value];
     scenario.setTeam1([hero], [[-192.270, 17.426, 12.783]], [[1, 0, -1]], [true]);
-    console.log(scenario.generateCode());
+    navigator.clipboard.writeText(scenario.generateCode());
+    alert("Code copied to clipboard!")
 }
