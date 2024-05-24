@@ -61,10 +61,9 @@ class Scenario {
                 `Subroutine;
         init${i};`,
                 '',
-                `If(Hero Of(Event Player) == Hero(${this.team1[i]}));
-                    Set Ultimate Charge(Event Player, ${this.hasUltimate1[i] ? 100 : 0});
-                    Teleport(Event Player, Vector(${this.positions1[i][0]}, ${this.positions1[i][1]}, ${this.positions1[i][2]}));
-                    Set Facing(Event Player, Vector(${this.facing1[i][0]}, ${this.facing1[i][1]}, ${this.facing1[i][2]}), To World);`
+                `Set Ultimate Charge(Players On Hero(Hero(${this.team1[i]}), Team 1), ${this.hasUltimate1[i] ? 100 : 0});
+                    Teleport(Players On Hero(Hero(${this.team1[i]}), Team 1), Vector(${this.positions1[i][0]}, ${this.positions1[i][1]}, ${this.positions1[i][2]}));
+                    Set Facing(Players On Hero(Hero(${this.team1[i]}), Team 1), Vector(${this.facing1[i][0]}, ${this.facing1[i][1]}, ${this.facing1[i][2]}), To World);`
             ))
         }
 
@@ -75,10 +74,9 @@ class Scenario {
                 `Subroutine;
         init${i + 10};`,
                 '',
-                `If(Hero Of(Event Player) == Hero(${this.team2[i]}));
-                    Set Ultimate Charge(Event Player, ${this.hasUltimate2[i] ? 100 : 0});
-                    Teleport(Event Player, Vector(${this.positions2[i][0]}, ${this.positions2[i][1]}, ${this.positions2[i][2]}));
-                    Set Facing(Event Player, Vector(${this.facing2[i][0]}, ${this.facing2[i][1]}, ${this.facing2[i][2]}), To World);`
+                `Set Ultimate Charge(Players On Hero(Hero(${this.team2[i]}), Team 2), ${this.hasUltimate2[i] ? 100 : 0});
+                    Teleport(Players On Hero(Hero(${this.team2[i]}), Team 2), Vector(${this.positions2[i][0]}, ${this.positions2[i][1]}, ${this.positions2[i][2]}));
+                    Set Facing(Players On Hero(Hero(${this.team2[i]}), Team 2), Vector(${this.facing2[i][0]}, ${this.facing2[i][1]}, ${this.facing2[i][2]}), To World);`
             ))
         }
 
