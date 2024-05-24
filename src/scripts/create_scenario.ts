@@ -1,7 +1,6 @@
-
-import { Hero } from "./heroes";
-import { OverwatchMap } from "./maps";
-import Scenario from "./scenario";
+import { Hero } from "../scenarios/heroes";
+import { OverwatchMap } from "../scenarios/maps";
+import Scenario from "../scenarios/scenario";
 
 let scenario = new Scenario();
 
