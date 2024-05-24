@@ -3,5 +3,6 @@
 ```
 > npx tsc
 > npx webpack
-> node build
+> cd dist
+> node .
 ```
