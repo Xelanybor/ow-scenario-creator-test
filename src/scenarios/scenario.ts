@@ -22,8 +22,6 @@ class Scenario {
     private map: OverwatchMap = OverwatchMap.KingsRow;
     private point: number = -1;
 
-    private subroutines: string[] = [];
-
     private rules: Rule[] = [];
 
     constructor() {}
@@ -53,10 +51,11 @@ class Scenario {
     public generateCode(): string {
         
         let code = new Workshop();
+        let subroutines: string[] = [];
 
         // create a rule for each player to put them in the right place
         for (let i = 0; i < this.team1.length; i++) {
-            this.subroutines.push(`init${i}`);
+            subroutines.push(`init${i}`);
             code.addRule(new Rule(
                 `Initialise Team 1 ${this.team1[i]}`,
                 `Subroutine;
@@ -70,7 +69,7 @@ class Scenario {
         }
 
         for (let i = 0; i < this.team2.length; i++) {
-            this.subroutines.push(`init${i + 10}`);
+            subroutines.push(`init${i + 10}`);
             code.addRule(new Rule(
                 `Initialise Team 2 ${this.team2[i]}`,
                 `Subroutine;
@@ -88,13 +87,13 @@ class Scenario {
         code.setMap(this.map);
         code.setPoint(this.point);
 
-        this.subroutines.forEach(subroutine => {
+        subroutines.forEach(subroutine => {
             code.addSubroutine(subroutine);
         });
 
         let initPlayersActions = '';
-        for (let i = 0; i < this.subroutines.length; i++) {
-            initPlayersActions += `Call Subroutine(${this.subroutines[i]});\n`;
+        for (let i = 0; i < subroutines.length; i++) {
+            initPlayersActions += `Call Subroutine(${subroutines[i]});\n`;
         }
 
         this.rules.forEach(rule => {
