@@ -53,6 +53,13 @@ class Scenario {
         let code = new Workshop();
         let subroutines: string[] = [];
 
+        // set lobby settings
+        code.addLobbySetting('Allow Players Who Are In Queue: Yes');
+        code.addLobbySetting('Max Spectators: 6');
+        code.addLobbySetting(`Max Team 1 Players: ${this.team1.length}`);
+        code.addLobbySetting(`Max Team 2 Players: ${this.team2.length}`);
+        code.addLobbySetting('Swap Teams After Match: No');
+
         // create a rule for each player to put them in the right place
         for (let i = 0; i < this.team1.length; i++) {
             subroutines.push(`init${i}`);

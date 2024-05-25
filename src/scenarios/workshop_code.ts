@@ -11,6 +11,7 @@ class Workshop {
   private point: number = -1;
 
   private subroutines: string[] = [];
+  private lobbySettings: string[] = [];
 
   private rules: Rule[] = [];
 
@@ -40,8 +41,17 @@ class Workshop {
     this.rules.push(rule);
   }
 
+  addLobbySetting(lobby: string): void {
+    this.lobbySettings.push(lobby);
+  }
+
   toCode(): string {
     let code = 'settings\n{\n';
+    code += 'lobby\n{\n';
+    for (let i = 0; i < this.lobbySettings.length; i++) {
+      code += this.lobbySettings[i] + '\n';
+    }
+    code += '}\n';
     code += setHeroes(this.team1, this.team2) + '\n';
     code += setMap(this.map, this.point) + '\n';
     code += '}\n';
