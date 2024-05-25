@@ -26,6 +26,15 @@ app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.resolve(distPath, 'favicon.ico'));
 });
 
+app.get('/images/heroes/:filename', (req, res) => {
+  res.sendFile(path.resolve(distPath, 'images/heroes', req.params.filename));
+});
+
+app.get('/styles/:filename', (req, res) => {
+  res.sendFile(path.resolve(distPath, 'styles', req.params.filename));
+});
+
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

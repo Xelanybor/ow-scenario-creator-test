@@ -15,20 +15,48 @@ if (!b) {
 }
 b.onclick = printCode;
 
+// Map selection
+
+let mapDropdown = document.getElementById("mapSelect") as HTMLSelectElement;
+if (mapDropdown) {
+    for (let map of Object.keys(OverwatchMap)) {
+        let o = document.createElement("option");
+        o.value = map;
+        o.text = (OverwatchMap as any)[map];
+        mapDropdown.appendChild(o);
+    }
+}
+
+
 // Team 1 hero selection
 
 function addTeam1Hero() {
+    let component = document.createElement("div");
+    component.className = "hero-settings";
+    
     let dropdown = document.createElement("select");
     team1.push(dropdown);
     let team1Div = document.getElementById("team1-heroes");
-    if (team1Div) {team1Div.appendChild(dropdown)};
-
+    if (team1Div) {team1Div.appendChild(component)};
+    
     for (let hero of Object.keys(Hero)) {
         let o = document.createElement("option");
         o.value = hero;
         o.text = (Hero as any)[hero];
         dropdown.appendChild(o);
     }
+    
+    let icon = document.createElement("img");
+    icon.className = "hero-icon";
+    icon.src = `../images/heroes/${dropdown.value}.png`;
+
+    dropdown.onchange = function() {
+        icon.src = `../images/heroes/${dropdown.value}.png`;
+    }
+    
+    component.appendChild(icon);
+    component.appendChild(dropdown);
+
 }
 
 let addTeam1HeroButton = document.getElementById("addTeam1Hero");
@@ -37,17 +65,33 @@ if (addTeam1HeroButton) {addTeam1HeroButton.onclick = addTeam1Hero;}
 // Team 2 hero selection
 
 function addTeam2Hero() {
+
+    let component = document.createElement("div");
+    component.className = "hero-settings";
+    
     let dropdown = document.createElement("select");
     team2.push(dropdown);
     let team2Div = document.getElementById("team2-heroes");
-    if (team2Div) {team2Div.appendChild(dropdown)};
-
+    if (team2Div) {team2Div.appendChild(component)};
+    
     for (let hero of Object.keys(Hero)) {
         let o = document.createElement("option");
         o.value = hero;
         o.text = (Hero as any)[hero];
         dropdown.appendChild(o);
     }
+    
+    let icon = document.createElement("img");
+    icon.className = "hero-icon";
+    icon.src = `../images/heroes/${dropdown.value}.png`;
+
+    dropdown.onchange = function() {
+        icon.src = `../images/heroes/${dropdown.value}.png`;
+    }
+    
+    component.appendChild(icon);
+    component.appendChild(dropdown);
+
 }
 
 let addTeam2HeroButton = document.getElementById("addTeam2Hero");
@@ -57,7 +101,7 @@ if (addTeam2HeroButton) {addTeam2HeroButton.onclick = addTeam2Hero;}
 
 export function printCode() {
     let scenario = new Scenario();
-    scenario.setMap(OverwatchMap.Oasis);
+    scenario.setMap((OverwatchMap as any)[(mapDropdown as HTMLSelectElement).value]);
     scenario.setPoint(2);
     
     // set team 1

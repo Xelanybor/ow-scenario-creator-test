@@ -70,14 +70,19 @@ const push = [
     OverwatchMap.NewQueenStreet
 ]
 
-function setMap(map: OverwatchMap, point: number = -1): string {
-    let mode = '';
+function getMode(map: OverwatchMap): string {
+    if (control.includes(map)) { return 'Control'; }
+    else if (escort.includes(map)) { return 'Escort'; }
+    else if (flashpoint.includes(map)) { return 'Flashpoint'; }
+    else if (hybrid.includes(map)) { return 'Hybrid'; }
+    else if (push.includes(map)) { return 'Push'; }
+    else return '';
+}
 
-    if (control.includes(map)) { mode = 'Control'; }
-    else if (escort.includes(map)) { mode = 'Escort'; }
-    else if (flashpoint.includes(map)) { mode = 'Flashpoint'; }
-    else if (hybrid.includes(map)) { mode = 'Hybrid'; }
-    else if (push.includes(map)) { mode = 'Push'; }
+function setMap(map: OverwatchMap, point: number = -1): string {
+
+    let mode = getMode(map);
+
     return `    modes
     {
         ${mode}
@@ -90,6 +95,7 @@ function setMap(map: OverwatchMap, point: number = -1): string {
 
         General
         {
+            Competitive Rules: On
             ${point > -1 ? 'Limit Valid Control Points: ' + ['First', 'Second', 'Third'][point] : ''}
         }
 
@@ -97,4 +103,4 @@ function setMap(map: OverwatchMap, point: number = -1): string {
 `
 }
 
-export { OverwatchMap, setMap };
+export { OverwatchMap, setMap, getMode };
