@@ -23,3 +23,11 @@ body {
     border-radius: 10px;
     margin-right: 10px;
   }
+
+  .team-heroes {
+    /* padding: 20px;
+    background-color: blue; */
+    /* display: flex;
+    flex-wrap: wrap; */
+    justify-content: space-around;
+  }
