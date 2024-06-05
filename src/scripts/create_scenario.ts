@@ -97,6 +97,20 @@ function addTeam2Hero() {
 let addTeam2HeroButton = document.getElementById("addTeam2Hero");
 if (addTeam2HeroButton) {addTeam2HeroButton.onclick = addTeam2Hero;}
 
+// Change Map
+
+function changeMap() {
+
+    let map = (OverwatchMap as any)[(mapDropdown as HTMLSelectElement).value];
+    let mapImage = document.getElementById("map-image") as HTMLImageElement;
+    mapImage.src = `../images/maps/${map}2.png`;
+
+
+
+}
+
+if (mapDropdown) {mapDropdown.onchange = changeMap;}
+
 
 
 export function printCode() {

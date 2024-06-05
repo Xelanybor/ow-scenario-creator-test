@@ -53,7 +53,8 @@ p {
 
 #map-image {
   position: relative;
-  width: 150%;
-  left: -25%;
+  width: 250%;
+  top: -25%;
+  left: -75%;
   /* height: 100%; */
 }
