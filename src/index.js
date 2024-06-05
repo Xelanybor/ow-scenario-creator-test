@@ -30,6 +30,10 @@ app.get('/images/heroes/:filename', (req, res) => {
   res.sendFile(path.resolve(distPath, 'images/heroes', req.params.filename));
 });
 
+app.get('/images/maps/:filename', (req, res) => {
+  res.sendFile(path.resolve(distPath, 'images/maps', req.params.filename));
+});
+
 app.get('/styles/:filename', (req, res) => {
   res.sendFile(path.resolve(distPath, 'styles', req.params.filename));
 });
