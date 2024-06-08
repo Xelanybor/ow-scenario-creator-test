@@ -11,12 +11,19 @@ p {
 }
 
 .hero-settings {
-  background-color: #b7ceff;
   border-color: #000;
   color: #000;
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
+}
+
+.hero-settings.team1 {
+  background-color: #b7ceff;
+}
+
+.hero-settings.team2 {
+  background-color: #ff9594;
 }
 
 .hero-icon {

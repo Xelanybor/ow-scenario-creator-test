@@ -32,7 +32,7 @@ if (mapDropdown) {
 
 function addTeam1Hero() {
     let component = document.createElement("div");
-    component.className = "hero-settings";
+    component.className = "hero-settings team1";
     
     let dropdown = document.createElement("select");
     team1.push(dropdown);
@@ -67,7 +67,7 @@ if (addTeam1HeroButton) {addTeam1HeroButton.onclick = addTeam1Hero;}
 function addTeam2Hero() {
 
     let component = document.createElement("div");
-    component.className = "hero-settings";
+    component.className = "hero-settings team2";
     
     let dropdown = document.createElement("select");
     team2.push(dropdown);
