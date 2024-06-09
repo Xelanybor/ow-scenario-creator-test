@@ -63,9 +63,5 @@ p {
   
   #map-image {
     position: relative;
-    width: 200%;
-    /* top: -25%;
-    left: -75%; */
     cursor: grab;
-  /* height: 100%; */
 }

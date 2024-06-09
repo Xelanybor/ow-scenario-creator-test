@@ -118,10 +118,21 @@ let mapMoveStart: vec2 = [0, 0];
 let mouseDown: boolean = false;
 
 let mapImage = document.getElementById("map-image");
+    
+if (mapImage && mapImageDiv) {
 
-if (mapImage) {
+    if (mapImageDiv) {mapImage.style.width = 2 * mapImageDiv.offsetWidth + "px";}
 
-    mapImage.onmousedown = (event: MouseEvent) => {
+    mapImageDiv.onwheel = (event: WheelEvent) => {
+        if (!mapImageDiv) {return;}
+        event.preventDefault();
+        let width = parseInt(mapImage.style.width.split("px")[0]);
+        
+        let delta = event.deltaY;
+        mapImage.style.width = (width - delta) + "px";
+    }
+
+    mapImageDiv.onmousedown = (event: MouseEvent) => {
         // console.log("start moving map");
         event.preventDefault();
         mapMoveStart = [event.clientX, event.clientY];
@@ -138,7 +149,6 @@ if (mapImage) {
     document.onmousemove = (event: MouseEvent) => {
 
         if (!mouseDown) {return;}
-        // console.log("moving map");
         if (!mapImageDiv) {return;}
         event.preventDefault();
         let x = event.clientX - mapMoveStart[0];
@@ -148,9 +158,6 @@ if (mapImage) {
         mapImageDiv.scrollTop -= y;
 
         mapMoveStart = [event.clientX, event.clientY];
-
-        // console.log(x, y);
-        console.log(mapImageDiv.scrollLeft, mapImageDiv.scrollTop);
 
     }
 
