@@ -53,15 +53,19 @@ p {
   border-color: #000;
   color: #000;
   width: 50%;
+  height: 1000px;
+  max-height: 98vh;
   border-radius: 10px;
   float: right;
   overflow: hidden;
-}
-
-#map-image {
-  position: relative;
-  width: 250%;
-  top: -25%;
-  left: -75%;
+  /* display: flex; */
+  }
+  
+  #map-image {
+    position: relative;
+    width: 200%;
+    /* top: -25%;
+    left: -75%; */
+    cursor: grab;
   /* height: 100%; */
 }

@@ -2,6 +2,7 @@ import { Hero } from "../scenarios/heroes";
 import { OverwatchMap } from "../scenarios/maps";
 import Scenario from "../scenarios/scenario";
 
+type vec2 = [number, number];
 type vec3 = [number, number, number];
 
 var team1: HTMLElement[] = [];
@@ -105,13 +106,55 @@ function changeMap() {
     let mapImage = document.getElementById("map-image") as HTMLImageElement;
     mapImage.src = `../images/maps/${map}2.png`;
 
-
-
 }
 
 if (mapDropdown) {mapDropdown.onchange = changeMap;}
 
+// Move Map
 
+let mapImageDiv = document.getElementById("map");
+
+let mapMoveStart: vec2 = [0, 0];
+let mouseDown: boolean = false;
+
+let mapImage = document.getElementById("map-image");
+
+if (mapImage) {
+
+    mapImage.onmousedown = (event: MouseEvent) => {
+        // console.log("start moving map");
+        event.preventDefault();
+        mapMoveStart = [event.clientX, event.clientY];
+        mouseDown = true;
+        mapImage.style.cursor = "grabbing";
+    }
+
+    document.onmouseup = (event: MouseEvent) => {
+        // console.log("stop moving map");
+        mouseDown = false;
+        mapImage.style.cursor = "grab";
+    }
+
+    document.onmousemove = (event: MouseEvent) => {
+
+        if (!mouseDown) {return;}
+        // console.log("moving map");
+        if (!mapImageDiv) {return;}
+        event.preventDefault();
+        let x = event.clientX - mapMoveStart[0];
+        let y = event.clientY - mapMoveStart[1];
+
+        mapImageDiv.scrollLeft -= x;
+        mapImageDiv.scrollTop -= y;
+
+        mapMoveStart = [event.clientX, event.clientY];
+
+        // console.log(x, y);
+        console.log(mapImageDiv.scrollLeft, mapImageDiv.scrollTop);
+
+    }
+
+}
 
 export function printCode() {
     let scenario = new Scenario();
