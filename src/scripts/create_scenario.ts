@@ -5,8 +5,12 @@ import Scenario from "../scenarios/scenario";
 type vec2 = [number, number];
 type vec3 = [number, number, number];
 
-var team1: HTMLElement[] = [];
-var team2: HTMLElement[] = [];
+var team1Heroes: HTMLSelectElement[] = [];
+var team2Heroes: HTMLSelectElement[] = [];
+var team1Ultimates: HTMLInputElement[] = [];
+var team2Ultimates: HTMLInputElement[] = [];
+
+
 
 let b = document.getElementById("testButton");
 if (!b) {
@@ -36,7 +40,7 @@ function addTeam1Hero() {
     component.className = "hero-settings team1";
     
     let dropdown = document.createElement("select");
-    team1.push(dropdown);
+    team1Heroes.push(dropdown);
     let team1Div = document.getElementById("team1-heroes");
     if (team1Div) {team1Div.appendChild(component)};
     
@@ -58,6 +62,15 @@ function addTeam1Hero() {
     component.appendChild(icon);
     component.appendChild(dropdown);
 
+    let ultCheckbox = document.createElement("input");
+    team1Ultimates.push(ultCheckbox);
+    ultCheckbox.type = "checkbox";
+    ultCheckbox.checked = false;
+    let ultLabel = document.createElement("label");
+    ultLabel.innerHTML = "Has Ultimate";
+    component.appendChild(ultCheckbox);
+    component.appendChild(ultLabel);
+
 }
 
 let addTeam1HeroButton = document.getElementById("addTeam1Hero");
@@ -71,7 +84,7 @@ function addTeam2Hero() {
     component.className = "hero-settings team2";
     
     let dropdown = document.createElement("select");
-    team2.push(dropdown);
+    team2Heroes.push(dropdown);
     let team2Div = document.getElementById("team2-heroes");
     if (team2Div) {team2Div.appendChild(component)};
     
@@ -92,6 +105,15 @@ function addTeam2Hero() {
     
     component.appendChild(icon);
     component.appendChild(dropdown);
+
+    let ultCheckbox = document.createElement("input");
+    team2Ultimates.push(ultCheckbox);
+    ultCheckbox.type = "checkbox";
+    ultCheckbox.checked = false;
+    let ultLabel = document.createElement("label");
+    ultLabel.innerHTML = "Has Ultimate";
+    component.appendChild(ultCheckbox);
+    component.appendChild(ultLabel);
 
 }
 
@@ -169,21 +191,21 @@ if (mapFrame && mapImageDiv) {
 
 export function printCode() {
     let scenario = new Scenario();
-    scenario.setMap((OverwatchMap as any)[(mapDropdown as HTMLSelectElement).value]);
+    scenario.setMap((OverwatchMap as any)[mapDropdown.value]);
     scenario.setPoint(2);
     
     // set team 1
-    let heroes1: Hero[] = team1.map(dropdown => (Hero as any)[(dropdown as HTMLSelectElement).value]);
+    let heroes1: Hero[] = team1Heroes.map(dropdown => (Hero as any)[dropdown.value]);
     let position1: vec3[] = heroes1.map(hero => [-192.270, 17.426, 12.783]);
     let facing1: vec3[] = heroes1.map(hero => [1, 0, -1]);
-    let hasUlt1: boolean[] = heroes1.map(hero => true);
+    let hasUlt1: boolean[] = team1Ultimates.map(checkbox => checkbox.checked);
     scenario.setTeam1(heroes1, position1, facing1, hasUlt1);
 
     // set team 2
-    let heroes2: Hero[] = team2.map(dropdown => (Hero as any)[(dropdown as HTMLSelectElement).value]);
+    let heroes2: Hero[] = team2Heroes.map(dropdown => (Hero as any)[dropdown.value]);
     let position2: vec3[] = heroes2.map(hero => [-192.270, 17.426, 12.783]);
     let facing2: vec3[] = heroes2.map(hero => [-1, 0, 1]);
-    let hasUlt2: boolean[] = heroes2.map(hero => false);
+    let hasUlt2: boolean[] = team2Ultimates.map(checkbox => checkbox.checked);
     scenario.setTeam2(heroes2, position2, facing2, hasUlt2);
 
     // copy workshop code to clipboard
