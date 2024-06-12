@@ -117,19 +117,19 @@ let mapImageDiv = document.getElementById("map");
 let mapMoveStart: vec2 = [0, 0];
 let mouseDown: boolean = false;
 
-let mapImage = document.getElementById("map-image");
+let mapFrame = document.getElementById("map-frame");
     
-if (mapImage && mapImageDiv) {
+if (mapFrame && mapImageDiv) {
 
-    if (mapImageDiv) {mapImage.style.width = 2 * mapImageDiv.offsetWidth + "px";}
+    if (mapImageDiv) {mapFrame.style.width = 2 * mapImageDiv.offsetWidth + "px";}
 
     mapImageDiv.onwheel = (event: WheelEvent) => {
         if (!mapImageDiv) {return;}
         event.preventDefault();
-        let width = parseInt(mapImage.style.width.split("px")[0]);
+        let width = parseInt(mapFrame.style.width.split("px")[0]);
         
         let delta = event.deltaY;
-        mapImage.style.width = (width - delta) + "px";
+        mapFrame.style.width = (width - delta) + "px";
         mapImageDiv.scrollLeft -= (delta > 0 ? 1 : -1) * 50;
         // console.log(mapImageDiv.offsetHeight)
         // console.log(mapImageDiv.offsetWidth);
@@ -141,13 +141,13 @@ if (mapImage && mapImageDiv) {
         event.preventDefault();
         mapMoveStart = [event.clientX, event.clientY];
         mouseDown = true;
-        mapImage.style.cursor = "grabbing";
+        mapFrame.style.cursor = "grabbing";
     }
 
     document.onmouseup = (event: MouseEvent) => {
         // console.log("stop moving map");
         mouseDown = false;
-        mapImage.style.cursor = "grab";
+        mapFrame.style.cursor = "grab";
     }
 
     document.onmousemove = (event: MouseEvent) => {
