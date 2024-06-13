@@ -9,6 +9,8 @@ var team1Heroes: HTMLSelectElement[] = [];
 var team2Heroes: HTMLSelectElement[] = [];
 var team1Ultimates: HTMLInputElement[] = [];
 var team2Ultimates: HTMLInputElement[] = [];
+var team1Markers: HTMLImageElement[] = [];
+var team2Markers: HTMLImageElement[] = [];
 
 
 
@@ -33,6 +35,8 @@ if (mapDropdown) {
 }
 
 
+let mapFrame = document.getElementById("map-frame");
+
 // Team 1 hero selection
 
 function addTeam1Hero() {
@@ -55,12 +59,23 @@ function addTeam1Hero() {
     icon.className = "hero-icon";
     icon.src = `../images/heroes/${dropdown.value}.png`;
 
-    dropdown.onchange = function() {
+    let marker = document.createElement("img");
+    marker.className = "hero-marker team1";
+    marker.src = `../images/heroes/${dropdown.value}.png`;
+
+    team1Markers.push(marker);
+
+    marker.style.left = `${Math.random() * 100}%`;
+    marker.style.top = `${Math.random() * 100}%`;
+
+    dropdown.onchange = () => {
         icon.src = `../images/heroes/${dropdown.value}.png`;
+        marker.src = `../images/heroes/${dropdown.value}.png`;
     }
     
     component.appendChild(icon);
     component.appendChild(dropdown);
+    if (mapFrame) { mapFrame.appendChild(marker); }
 
     let ultCheckbox = document.createElement("input");
     team1Ultimates.push(ultCheckbox);
@@ -99,12 +114,24 @@ function addTeam2Hero() {
     icon.className = "hero-icon";
     icon.src = `../images/heroes/${dropdown.value}.png`;
 
-    dropdown.onchange = function() {
+    let marker = document.createElement("img");
+    marker.className = "hero-marker team2";
+    marker.src = `../images/heroes/${dropdown.value}.png`;
+
+    team2Markers.push(marker);
+
+    marker.style.left = `${Math.random() * 100}%`;
+    marker.style.top = `${Math.random() * 100}%`;
+
+    dropdown.onchange = () => {
         icon.src = `../images/heroes/${dropdown.value}.png`;
+        marker.src = `../images/heroes/${dropdown.value}.png`;
     }
     
     component.appendChild(icon);
     component.appendChild(dropdown);
+
+    if (mapFrame) { mapFrame.appendChild(marker); }
 
     let ultCheckbox = document.createElement("input");
     team2Ultimates.push(ultCheckbox);
@@ -138,8 +165,6 @@ let mapImageDiv = document.getElementById("map");
 
 let mapMoveStart: vec2 = [0, 0];
 let mouseDown: boolean = false;
-
-let mapFrame = document.getElementById("map-frame");
     
 if (mapFrame && mapImageDiv) {
 
@@ -196,14 +221,14 @@ export function printCode() {
     
     // set team 1
     let heroes1: Hero[] = team1Heroes.map(dropdown => (Hero as any)[dropdown.value]);
-    let position1: vec3[] = heroes1.map(hero => [-192.270, 17.426, 12.783]);
+    let position1: vec3[] = team1Markers.map(marker => [parseInt(marker.style.left), 0, parseInt(marker.style.top)]);
     let facing1: vec3[] = heroes1.map(hero => [1, 0, -1]);
     let hasUlt1: boolean[] = team1Ultimates.map(checkbox => checkbox.checked);
     scenario.setTeam1(heroes1, position1, facing1, hasUlt1);
 
     // set team 2
     let heroes2: Hero[] = team2Heroes.map(dropdown => (Hero as any)[dropdown.value]);
-    let position2: vec3[] = heroes2.map(hero => [-192.270, 17.426, 12.783]);
+    let position2: vec3[] = team2Markers.map(marker => [parseInt(marker.style.left), 0, parseInt(marker.style.top)]);
     let facing2: vec3[] = heroes2.map(hero => [-1, 0, 1]);
     let hasUlt2: boolean[] = team2Ultimates.map(checkbox => checkbox.checked);
     scenario.setTeam2(heroes2, position2, facing2, hasUlt2);
