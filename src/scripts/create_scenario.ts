@@ -34,7 +34,7 @@ if (mapDropdown) {
     }
 }
 
-
+let mapImageDiv = document.getElementById("map");
 let mapFrame = document.getElementById("map-frame");
 
 // Team 1 hero selection
@@ -65,8 +65,16 @@ function addTeam1Hero() {
 
     team1Markers.push(marker);
 
-    marker.style.left = `${Math.random() * 100}%`;
-    marker.style.top = `${Math.random() * 100}%`;
+    if (mapImageDiv && mapFrame) {
+        let x = (0.5 * mapImageDiv.clientWidth / mapFrame.clientWidth) + mapImageDiv.scrollLeft / mapFrame.clientWidth;
+        let y = (0.5 * mapImageDiv.clientHeight / mapFrame.clientHeight) + mapImageDiv.scrollTop / mapFrame.clientHeight;
+        marker.style.left = `${x * 100}%`;
+        marker.style.top = `${y * 100}%`;
+    }
+    else {
+        marker.style.left = `${Math.random() * 100}%`;
+        marker.style.top = `${Math.random() * 100}%`;
+    }
 
     dropdown.onchange = () => {
         icon.src = `../images/heroes/${dropdown.value}.png`;
@@ -132,8 +140,16 @@ function addTeam2Hero() {
 
     team2Markers.push(marker);
 
-    marker.style.left = `${Math.random() * 100}%`;
-    marker.style.top = `${Math.random() * 100}%`;
+    if (mapImageDiv && mapFrame) {
+        let x = (0.5 * mapImageDiv.clientWidth / mapFrame.clientWidth) + mapImageDiv.scrollLeft / mapFrame.clientWidth;
+        let y = (0.5 * mapImageDiv.clientHeight / mapFrame.clientHeight) + mapImageDiv.scrollTop / mapFrame.clientHeight;
+        marker.style.left = `${x * 100}%`;
+        marker.style.top = `${y * 100}%`;
+    }
+    else {
+        marker.style.left = `${Math.random() * 100}%`;
+        marker.style.top = `${Math.random() * 100}%`;
+    }
 
     dropdown.onchange = () => {
         icon.src = `../images/heroes/${dropdown.value}.png`;
@@ -185,8 +201,6 @@ if (mapDropdown) {mapDropdown.onchange = changeMap;}
 
 // Move Map
 
-let mapImageDiv = document.getElementById("map");
-
 let mapMoveStart: vec2 = [0, 0];
 let mouseDown: boolean = false;
     
@@ -202,13 +216,10 @@ if (mapFrame && mapImageDiv) {
         let delta = event.deltaY;
         mapFrame.style.width = (width - delta) + "px";
         mapImageDiv.scrollLeft -= (delta > 0 ? 1 : -1) * 50;
-        // console.log(mapImageDiv.offsetHeight)
-        // console.log(mapImageDiv.offsetWidth);
         mapImageDiv.scrollTop -= (delta > 0 ? 1 : -1) * (mapImageDiv.offsetHeight / mapImageDiv.offsetWidth) * 25;
     }
 
     mapImageDiv.onmousedown = (event: MouseEvent) => {
-        // console.log("start moving map");
         event.preventDefault();
         mapMoveStart = [event.clientX, event.clientY];
         mouseDown = true;
@@ -216,7 +227,6 @@ if (mapFrame && mapImageDiv) {
     }
 
     document.onmouseup = (event: MouseEvent) => {
-        // console.log("stop moving map");
         mouseDown = false;
         mapFrame.style.cursor = "grab";
     }
