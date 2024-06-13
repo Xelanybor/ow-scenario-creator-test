@@ -86,6 +86,18 @@ function addTeam1Hero() {
     component.appendChild(ultCheckbox);
     component.appendChild(ultLabel);
 
+    // Delete button
+    let deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    deleteButton.onclick = () => {
+        team1Heroes = team1Heroes.filter(d => d != dropdown);
+        team1Ultimates = team1Ultimates.filter(d => d != ultCheckbox);
+        if (mapFrame) { mapFrame.removeChild(marker); }
+        component.remove();
+    }
+
+    component.appendChild(deleteButton);
+
 }
 
 let addTeam1HeroButton = document.getElementById("addTeam1Hero");
@@ -141,6 +153,18 @@ function addTeam2Hero() {
     ultLabel.innerHTML = "Has Ultimate";
     component.appendChild(ultCheckbox);
     component.appendChild(ultLabel);
+
+    // Delete button
+    let deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    deleteButton.onclick = () => {
+        team2Heroes = team2Heroes.filter(d => d != dropdown);
+        team2Ultimates = team2Ultimates.filter(d => d != ultCheckbox);
+        if (mapFrame) { mapFrame.removeChild(marker); }
+        component.remove();
+    }
+
+    component.appendChild(deleteButton);
 
 }
 
