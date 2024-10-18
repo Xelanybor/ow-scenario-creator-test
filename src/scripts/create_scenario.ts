@@ -216,7 +216,7 @@ if (mapFrame && mapImageDiv) {
         let delta = event.deltaY;
         mapFrame.style.width = (width - delta) + "px";
         mapImageDiv.scrollLeft -= (delta > 0 ? 1 : -1) * 50;
-        mapImageDiv.scrollTop -= (delta > 0 ? 1 : -1) * (mapImageDiv.offsetHeight / mapImageDiv.offsetWidth) * 25;
+        mapImageDiv.scrollTop -= (delta > 0 ? 1 : -1) * (mapImageDiv.clientHeight / mapImageDiv.clientWidth) * 50;
     }
 
     mapImageDiv.onmousedown = (event: MouseEvent) => {
